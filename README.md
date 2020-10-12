@@ -4,8 +4,7 @@ This helps in updating the Indian Origin Academicians database to reflect the ne
 
 
 **Contributors:**
-
-Rahul Garg<br />
-Piyush Girdhar<br />
-Anmol Salhvi<br />
-Vishwajeet Singh<br />
+> Rahul Garg<br />
+> Piyush Girdhar<br />
+> Anmol Salhvi<br />
+> Vishwajeet Singh<br />
