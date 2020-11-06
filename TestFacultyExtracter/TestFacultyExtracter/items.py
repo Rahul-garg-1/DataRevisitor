@@ -8,5 +8,12 @@ import scrapy
 
 class TestfacultyextracterItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    content = scrapy.Field()
+    imageUrl=scrapy.Field()
+    url=scrapy.Field()
+
+class TestfacultyextracterItem2(scrapy.Item):
+    # define the fields for your item here like:
+    content = scrapy.Field()
+    name=scrapy.Field()
+    url=scrapy.Field()

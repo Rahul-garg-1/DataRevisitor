@@ -1,5 +1,6 @@
 import scrapy
 import pandas as pd
+from ..items import TestfacultyextracterItem
 
 class faculty_spider(scrapy.Spider):
 	name='facultyinfo'
@@ -9,17 +10,24 @@ class faculty_spider(scrapy.Spider):
 		self.start_urls=self.get_urls(self.df)
 
 	def parse(self,response):
-		content=response.css('*:not(script) :not(style) ::text').extract()
+		items=TestfacultyextracterItem()
+		# content=response.css('body *:not(script):not(style):not(nav):not(footer)::text').extract()
+		content=response.css('p::text').extract()
 		contents=[]
 		for s in content:
 			s=s.strip()
 			if ('\n' not in s) and (s!=',') and (s!='.') and (len(s)!=0):
 				contents.append(s)
-		yield {'content':contents}
+		items['content']=contents
+		items['imageUrl']=response.css('img::attr(src)').extract()
+		url=str(response)
+		url=url[5:]
+		items['url']=url[:-1]
+		yield items
 
 	def get_urls(self,df):
 		urls=list(df['URL'])
-		faculty_urls=[]
+		faculty_urls=set()
 		for url in urls:
 			url_list=url.split(',')
 
@@ -27,6 +35,6 @@ class faculty_spider(scrapy.Spider):
 				url1=url1.strip()
 
 				if '.edu/' in url1:
-					faculty_urls.append(url1)
+					faculty_urls.add(url1)
 
-		return faculty_urls
+		return list(faculty_urls)
