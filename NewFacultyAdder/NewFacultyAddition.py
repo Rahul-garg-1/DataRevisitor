@@ -101,13 +101,16 @@ def is_indian_name(full_name):
   full_name = full_name.lower()
   name_list = full_name.split(" ")
   first_name = name_list[0]
-  last_name = name_list[-1]
+  # last_name = name_list[-1]
   if len(name_list)==1 and first_name in first_names:
     return True
-  if last_name in last_names:
-    return True
+  else:
+    for ele in name_list:
+      if ele in last_names:
+        return True
   return False
 
+  
 def feedback(indian_names):
   print('Predicted Indian Names(Press y if correct n if incorrect):')
   for name in indian_names:
